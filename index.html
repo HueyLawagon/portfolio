@@ -460,9 +460,10 @@
        CERTIFICATIONS
     ─────────────────────────────── */
     .cert-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
     }
 
     .cert-card {
@@ -472,6 +473,8 @@
       padding: 26px;
       box-shadow: 0 12px 32px rgba(30,41,59,0.06);
       transition: transform 0.2s, box-shadow 0.2s;
+      flex: 1 1 300px;
+      max-width: 320px;
     }
 
     .cert-card:hover {
@@ -831,6 +834,13 @@
           <h3>Introduction to Networking and Storage</h3>
           <p>IBM-authorized Coursera course on networking concepts and storage fundamentals.</p>
           <a class="cert-link" href="assets/certificates/ibm-network-cert.pdf" target="_blank">View Certificate →</a>
+        </article>
+
+        <article class="cert-card">
+          <span class="cert-date">Jun 2025</span>
+          <h3>CCIS Innovision 2026 Participation</h3>
+          <p>Participated in the annual innovation conference organized by the College of Computer and Information Sciences.</p>
+          <a class="cert-link" href="assets/certificates/participation.jpg" target="_blank">View Certificate →</a>
         </article>
       </div>
     </section>
