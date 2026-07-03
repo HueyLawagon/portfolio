@@ -1,41 +1,865 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Student Portfolio</title>
-      <link rel="stylesheet" href="style.css">
-   </head>
-   <body>
-      <header>
-         <h1 id="name">Hugh Louis O. Lawagon</h1>
-         <img src="profile.jpg" alt="Profile Picture" id="profile-img">
-         <p id="course-year">Information Systems - 3rd Year</p>
-         <button id="theme-toggle">Switch Theme</button>
-      </header>
-      <section id="achievements">
-         <h2>Achievements/Certifications</h2>
-         <ul>
-         </ul>
-      </section>
-      <section id="projects">
-         <h2>Previous Projects</h2>
-         <ul>
-            <li>
-               <a href="https://eduinsight-sigma.vercel.app">IT103 Module 2 Summative Submission | EduInsight; a student analytics dashboard |</a>
-               <a href="https://youtu.be/AnzjtfMSYsk">Demo Video</a>
-            </li>
-            <li>
-               <a href="https://lawagonpokemonteamshowcase.vercel.app">IT103 Part 3 Summative Submission | Pokemon Team Showcase</a>
-            </li>
-            <li>
-               <a href="https://thecozycornerbylawagon-iota.vercel.app/">The Cozy Corner</a>
-            </li>
-            <li>
-               <a href="https://hueylawagon.github.io/M1F2-FreshSense-LandingPage-Lawagon/">M1F2 Fresh Sense</a>
-            </li>
-         </ul>
-      </section>
-      <script src="script.js"></script>
-   </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hugh Louis Lawagon | Portfolio</title>
+  <style>
+    :root {
+      --deep: #1e293b;
+      --accent: #6366f1;
+      --accent-light: #a5b4fc;
+      --mint: #34d399;
+      --peach: #fbbf24;
+      --sky: #38bdf8;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #334155;
+      --muted: #64748b;
+      --line: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ───────────────────────────────
+       HEADER / NAV
+    ─────────────────────────────── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    nav {
+      max-width: 1100px;
+      margin: auto;
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: var(--deep);
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 22px;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    /* ───────────────────────────────
+       HERO (FULL-WIDTH BACKGROUND)
+    ─────────────────────────────── */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 94vh;
+      display: flex;
+      align-items: center;
+      padding: 80px 24px;
+
+      /* FORCE FULL WIDTH */
+      max-width: none;
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      margin-right: calc(-50vw + 50%);
+
+      background:
+        radial-gradient(circle at 5% 15%, rgba(99,102,241,0.32), transparent 50%),
+        radial-gradient(circle at 95% 85%, rgba(52,211,153,0.26), transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(56,189,248,0.14), transparent 60%),
+        linear-gradient(160deg, #f0f9ff 0%, #faf5ff 50%, #fefce8 100%);
+    }
+
+    .hero-fade {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 180px;
+      background: linear-gradient(to bottom, transparent, var(--bg));
+      pointer-events: none;
+      z-index: 1;
+   }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 550px;
+      height: 550px;
+      border-radius: 50%;
+      background: rgba(251,191,36,0.2);
+      top: -120px;
+      right: -80px;
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: rgba(99,102,241,0.15);
+      bottom: -100px;
+      left: -100px;
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: relative;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .wave {
+      display: inline-block;
+      animation: wave 2.4s ease-in-out infinite;
+      transform-origin: 70% 70%;
+      font-size: 2rem;
+    }
+
+    @keyframes wave {
+      0%, 100% { transform: rotate(0deg); }
+      15% { transform: rotate(14deg); }
+      30% { transform: rotate(-8deg); }
+      45% { transform: rotate(14deg); }
+      60% { transform: rotate(-4deg); }
+      75% { transform: rotate(10deg); }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      line-height: 1.15;
+      color: var(--deep);
+      margin-bottom: 18px;
+    }
+
+    .hero h1 .highlight {
+      background: linear-gradient(90deg, var(--accent), var(--sky));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 22px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 8px 24px rgba(99,102,241,0.35);
+    }
+
+    .btn-outline {
+      border: 2px solid var(--line);
+      color: var(--deep);
+      background: white;
+    }
+
+    .photo-wrapper {
+      position: relative;
+    }
+
+    .blob {
+      position: absolute;
+      inset: -28px;
+      background: linear-gradient(135deg, var(--accent-light), var(--mint), var(--peach));
+      border-radius: 60% 40% 50% 50% / 50% 60% 40% 50%;
+      opacity: 0.55;
+      animation: morph 8s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    @keyframes morph {
+      0%, 100% { border-radius: 60% 40% 50% 50% / 50% 60% 40% 50%; }
+      50% { border-radius: 40% 60% 50% 50% / 60% 40% 50% 50%; }
+    }
+
+    .profile-photo {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: center 20%;
+      border-radius: 32px;
+      border: 6px solid white;
+      box-shadow: 0 20px 50px rgba(30,41,59,0.18);
+    }
+
+    /* ───────────────────────────────
+       SECTION TITLES
+    ─────────────────────────────── */
+    section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 90px 24px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 42px;
+    }
+
+    .section-title .label {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--accent), var(--sky));
+      color: white;
+      font-weight: 800;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      color: var(--deep);
+    }
+
+    /* ───────────────────────────────
+       ABOUT
+    ─────────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 12px 32px rgba(30,41,59,0.06);
+    }
+
+    .panel h3 {
+      color: var(--deep);
+      margin-bottom: 14px;
+      font-size: 1.2rem;
+    }
+
+    .panel p {
+      color: var(--muted);
+    }
+
+    .highlight-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .highlight-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px;
+      background: linear-gradient(135deg, #f0f9ff, #faf5ff);
+      border-radius: 16px;
+    }
+
+    .highlight-icon {
+      flex-shrink: 0;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent);
+      color: white;
+      border-radius: 12px;
+      font-size: 1.1rem;
+    }
+
+    .highlight-item strong {
+      display: block;
+      color: var(--deep);
+      margin-bottom: 2px;
+    }
+
+    .highlight-item span {
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    /* ───────────────────────────────
+       SKILLS
+    ─────────────────────────────── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .skill-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 26px;
+      box-shadow: 0 12px 32px rgba(30,41,59,0.06);
+    }
+
+    .skill-card h3 {
+      color: var(--deep);
+      margin-bottom: 16px;
+      font-size: 1.1rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag {
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    .tag-purple {
+      background: #ede9fe;
+      color: #6d28d9;
+    }
+
+    .tag-green {
+      background: #d1fae5;
+      color: #047857;
+    }
+
+    .tag-amber {
+      background: #fef3c7;
+      color: #b45309;
+    }
+
+    /* ───────────────────────────────
+       PROJECTS
+    ─────────────────────────────── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .project-card {
+      position: relative;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 30px;
+      box-shadow: 0 14px 36px rgba(30,41,59,0.07);
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--accent), var(--mint));
+    }
+
+    .project-card h3 {
+      color: var(--deep);
+      font-size: 1.25rem;
+      margin-bottom: 12px;
+    }
+
+    .project-card p {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    /* ───────────────────────────────
+       CERTIFICATIONS
+    ─────────────────────────────── */
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .cert-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 26px;
+      box-shadow: 0 12px 32px rgba(30,41,59,0.06);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .cert-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 44px rgba(30,41,59,0.12);
+    }
+
+    .cert-date {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--accent), var(--sky));
+      color: white;
+      font-weight: 700;
+      font-size: 0.78rem;
+      padding: 5px 12px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    .cert-card h3 {
+      color: var(--deep);
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      line-height: 1.35;
+    }
+
+    .cert-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 14px;
+    }
+
+    .cert-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .cert-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ───────────────────────────────
+       CONTACT
+    ─────────────────────────────── */
+    .contact-card {
+      background: linear-gradient(135deg, #f0f9ff, #faf5ff, #fefce8);
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      padding: 44px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      box-shadow: 0 18px 48px rgba(30,41,59,0.08);
+    }
+
+    .contact-card h2 {
+      font-size: 2rem;
+      color: var(--deep);
+      margin-bottom: 12px;
+    }
+
+    .contact-card > div:first-child p {
+      color: var(--muted);
+      max-width: 380px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .contact-item {
+      display: block;
+      background: white;
+      border: 1px solid var(--line);
+      padding: 16px 18px;
+      border-radius: 16px;
+      font-weight: 600;
+      color: var(--deep);
+      box-shadow: 0 6px 18px rgba(30,41,59,0.05);
+      overflow-wrap: anywhere;
+    }
+
+    .contact-item:hover {
+      border-color: var(--accent);
+    }
+
+    /* ───────────────────────────────
+       FOOTER
+    ─────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 28px;
+      background: var(--deep);
+      color: #94a3b8;
+      font-size: 0.92rem;
+    }
+
+    /* ───────────────────────────────
+       RESPONSIVE
+    ─────────────────────────────── */
+    @media (max-width: 840px) {
+      nav {
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 14px;
+      }
+
+      .hero-grid,
+      .about-grid,
+      .contact-card,
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 48px;
+        min-height: auto;
+      }
+
+      .blob {
+        inset: -18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a class="logo" href="#home">Hugh<span>Lawagon</span></a>
+
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#certifications">Certifications</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ════════════════════════════════════════
+         HERO
+    ════════════════════════════════════════ -->
+    <section id="home" class="hero">
+      <div class="hero-grid">
+        <div>
+          <p><span class="wave">👋</span></p>
+
+          <h1>
+            Hey, I'm <span class="highlight">Hugh Louis Lawagon</span>.
+          </h1>
+
+          <p>
+            I design and build digital systems that are practical, user-friendly, and organized.
+            My work combines full-stack development, database design, UI/UX thinking, and a
+            willingness to keep learning.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">See My Work</a>
+            <a class="btn btn-outline" href="#contact">Get in Touch</a>
+          </div>
+        </div>
+
+        <div class="photo-wrapper">
+          <div class="blob"></div>
+          <img class="profile-photo" src="assets/profile.jpg" alt="Hugh Louis Lawagon" />
+        </div>
+      </div>
+      <div class="hero-fade"></div>
+    </section>
+
+    <!-- ════════════════════════════════════════
+         ABOUT
+    ════════════════════════════════════════ -->
+    <section id="about">
+      <div class="section-title">
+        <span class="label">About</span>
+        <h2>A bit about me and what I do.</h2>
+      </div>
+
+      <div class="about-grid">
+        <div class="panel">
+          <h3>Who I Am</h3>
+
+          <p>
+            I'm an Information Systems graduate based in Davao City with certifications in Java,
+            UI/UX design, and IBM networking. I enjoy building tools that make information easier
+            to manage—whether that's a document tracking system or a student dashboard.
+          </p>
+
+          <br />
+
+          <p>
+            I'm fluent in English, comfortable working in teams, and always looking for new
+            technologies and approaches to explore.
+          </p>
+        </div>
+
+        <div class="panel">
+          <h3>What I Bring</h3>
+
+          <div class="highlight-list">
+            <div class="highlight-item">
+              <div class="highlight-icon">🗂️</div>
+              <div>
+                <strong>Systems Analysis</strong>
+                <span>Mapping workflows and designing organized data structures.</span>
+              </div>
+            </div>
+
+            <div class="highlight-item">
+              <div class="highlight-icon">🎨</div>
+              <div>
+                <strong>UI/UX Awareness</strong>
+                <span>Focusing on clarity, accessibility, and practical user flows.</span>
+              </div>
+            </div>
+
+            <div class="highlight-item">
+              <div class="highlight-icon">🛢️</div>
+              <div>
+                <strong>Database Management</strong>
+                <span>Designing schemas and working with MySQL.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════
+         SKILLS
+    ════════════════════════════════════════ -->
+    <section id="skills">
+      <div class="section-title">
+        <span class="label">Skills</span>
+        <h2>Tools and technologies I work with.</h2>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>Programming</h3>
+
+          <div class="tags">
+            <span class="tag tag-purple">C++</span>
+            <span class="tag tag-purple">Python</span>
+            <span class="tag tag-purple">Java</span>
+            <span class="tag tag-purple">HTML</span>
+            <span class="tag tag-purple">CSS</span>
+            <span class="tag tag-purple">JavaScript</span>
+            <span class="tag tag-purple">Node.js</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <h3>Database & Systems</h3>
+
+          <div class="tags">
+            <span class="tag tag-green">MySQL</span>
+            <span class="tag tag-green">Database Design</span>
+            <span class="tag tag-green">Systems Analysis</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <h3>Soft Skills</h3>
+
+          <div class="tags">
+            <span class="tag tag-amber">English Fluency</span>
+            <span class="tag tag-amber">Team Collaboration</span>
+            <span class="tag tag-amber">Problem Solving</span>
+            <span class="tag tag-amber">Continuous Learning</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════
+         PROJECTS
+    ════════════════════════════════════════ -->
+    <section id="projects">
+      <div class="section-title">
+        <span class="label">Projects</span>
+        <h2>Things I've built and contributed to.</h2>
+      </div>
+
+      <div class="projects-grid">
+        <article class="project-card">
+          <h3>DocuMon</h3>
+
+          <p>
+            A document request monitoring system designed to cut down on manual follow-ups
+            and give requesters real-time visibility into their request status.
+          </p>
+
+          <div class="tags">
+            <span class="tag tag-green">Systems Analysis</span>
+            <span class="tag tag-green">Database Design</span>
+            <span class="tag tag-purple">Workflow Tracking</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <h3>EduInsight</h3>
+
+          <p>
+            A student information system dashboard focused on clear UI/UX, helping staff
+            and students find important details quickly without navigating complex menus.
+          </p>
+
+          <div class="tags">
+            <span class="tag tag-amber">UI/UX</span>
+            <span class="tag tag-amber">Dashboard</span>
+            <span class="tag tag-purple">Information Systems</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════
+         CERTIFICATIONS
+    ════════════════════════════════════════ -->
+    <section id="certifications">
+      <div class="section-title">
+        <span class="label">Certifications</span>
+        <h2>Credentials and learning milestones.</h2>
+      </div>
+
+      <div class="cert-grid">
+        <article class="cert-card">
+          <span class="cert-date">Nov 2025</span>
+          <h3>Information Technology Specialist in Java</h3>
+          <p>Validates foundational Java programming and IT competency.</p>
+          <a class="cert-link" href="assets/certificates/java-cert.pdf" target="_blank">View Certificate →</a>
+        </article>
+
+        <article class="cert-card">
+          <span class="cert-date">Jul 2024</span>
+          <h3>Start the UX Design Process: Empathize, Define, and Ideate</h3>
+          <p>Google-authorized Coursera course on early-stage UX research and ideation.</p>
+          <a class="cert-link" href="assets/certificates/ux-cert.pdf" target="_blank">View Certificate →</a>
+        </article>
+
+        <article class="cert-card">
+          <span class="cert-date">Nov 2025</span>
+          <h3>Introduction to Networking and Storage</h3>
+          <p>IBM-authorized Coursera course on networking concepts and storage fundamentals.</p>
+          <a class="cert-link" href="assets/certificates/ibm-network-cert.pdf" target="_blank">View Certificate →</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════
+         CONTACT
+    ════════════════════════════════════════ -->
+    <section id="contact">
+      <div class="contact-card">
+        <div>
+          <h2>Let's connect 🤝</h2>
+
+          <p>
+            Based in Davao City and open to opportunities in information systems,
+            web development, database design, and user-centered digital solutions.
+          </p>
+        </div>
+
+        <div class="contact-list">
+          <span class="contact-item">📞 +63 976 122 7921</span>
+          <a class="contact-item" href="mailto:hlLawagon@mcm.edu.ph">✉️ hlLawagon@mcm.edu.ph</a>
+          <a class="contact-item" href="[github.com](https://github.com/HueyLawagon)" target="_blank">🐙 github.com/HueyLawagon</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Hugh Louis Lawagon · Crafted with care.</p>
+  </footer>
+</body>
 </html>
